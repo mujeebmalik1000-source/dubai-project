@@ -61,9 +61,9 @@ export default function Hero() {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05]">
               Dubai's Trusted Home
               <br />
-              Maintenance & Renovation
+              Maintenance - Renovation
               <br />
-              Company
+              Compony
             </h1>
 
             <p className="mt-6 text-base md:text-lg text-gray-200 max-w-4xl">
