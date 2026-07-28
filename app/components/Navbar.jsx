@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -24,7 +25,8 @@ const [mobileServices, setMobileServices] = useState(false);
 const [mobileLocations, setMobileLocations] = useState(false);
 const [mobileCompany, setMobileCompany] = useState(false);
 const [mobileResources, setMobileResources] = useState(false);
-  
+
+const closeTimeout = useRef(null);
   
   return (
      <nav className="fixed top-0 left-0 w-full bg-white border-b border-gray-200  z-50 shadow-sm">
@@ -55,19 +57,24 @@ const [mobileResources, setMobileResources] = useState(false);
 
               {/* service */}
 
-        <div
-        className="relative"
-        onMouseEnter={() => setServicesOpen(true)}
-        onMouseLeave={() => setServicesOpen(false)}
 
-        >
-
+              <div
+  className="relative"
+  onMouseEnter={() => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setServicesOpen(true);
+  }}
+  onMouseLeave={() => {
+    closeTimeout.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 250);
+  }}
+>
   <Link
     href="/services"
     className="flex items-center gap-1 text-gray-600 hover:text-[#184896] cursor-pointer"
   >
     Services
-
     <ChevronDown
       size={18}
       className={`transition-transform duration-300 ${
@@ -78,8 +85,14 @@ const [mobileResources, setMobileResources] = useState(false);
 
   {servicesOpen && (
     <div
-      onMouseEnter={() => setServicesOpen(true)}
-      onMouseLeave={() => setServicesOpen(false)}
+      onMouseEnter={() => {
+        if (closeTimeout.current) clearTimeout(closeTimeout.current);
+      }}
+      onMouseLeave={() => {
+        closeTimeout.current = setTimeout(() => {
+          setServicesOpen(false);
+        }, 250);
+      }}
     >
       <MegaMenu />
     </div>
@@ -87,8 +100,8 @@ const [mobileResources, setMobileResources] = useState(false);
 </div>
 
 
-              
 
+       
             
               {/* location */}
              <div
@@ -236,7 +249,11 @@ const [mobileResources, setMobileResources] = useState(false);
         )}
       </div>
 
+
+
       {/* Locations */}
+
+
       <div className="border-b">
         <button
           onClick={() => setMobileLocations(!mobileLocations)}
@@ -259,7 +276,11 @@ const [mobileResources, setMobileResources] = useState(false);
         )}
       </div>
 
+
+
       {/* Company */}
+
+
       <div className="border-b">
         <button
           onClick={() => setMobileCompany(!mobileCompany)}

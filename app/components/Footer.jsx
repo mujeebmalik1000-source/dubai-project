@@ -102,7 +102,7 @@ export default function Footer() {
                 <Phone className="text-[#1f5ab5]" size={21}/>
                 <div>
                   <p className="font-bold text-base">
-                    +971 56 151 7463
+                    +91 992 710 1994
                   </p>
                   <p className="text-slate-400 text-sm hover:text-white transition-colors duration-300 cursor-pointer">
                     24/7 Emergency Line

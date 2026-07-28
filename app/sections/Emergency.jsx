@@ -98,7 +98,7 @@ export default function Emergency() {
             "
           >
             <Phone size={20} />
-            Call +971 56 151 7463 Now
+            Call +91 954 802 5712 Now
           </button>
         </div>
 

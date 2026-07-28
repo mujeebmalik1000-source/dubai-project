@@ -31,7 +31,7 @@ export default function MegaMenu({ mobile = false }) {
       className={
         mobile
           ? "w-full bg-white border border-gray-200 rounded-lg overflow-hidden"
-          : "absolute top-full right-[-450px] mt-5 w-[880px] bg-white rounded-xl border border-gray-200 shadow-2xl p-6 z-50"
+          : "absolute top-full right-[-550px] mt-5 w-[900px] bg-white rounded-xl border border-gray-200 before:-top-5 before:h-5 shadow-2xl p-6 z-50"
       }
     >
       <div
@@ -43,12 +43,12 @@ export default function MegaMenu({ mobile = false }) {
       >
         {/* Column 1 */}
         <div>
-          <h3 className="flex items-center gap-2 text-sm font-bold mb-5">
+          <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
             <Wrench size={22} className="text-[#184896]" />
             Repair & Maintenance
           </h3>
 
-          <ul className="space-y-2">
+          <ul className="space-y-1">
 
             <li className={itemClass}>
               <Snowflake size={16} />
@@ -80,12 +80,12 @@ export default function MegaMenu({ mobile = false }) {
 
         {/* Column 2 */}
         <div>
-          <h3 className="flex items-center gap-2 text-sm font-bold mb-5">
+          <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
             <Paintbrush size={22} className="text-[#184896]" />
             Renovation & Fit-Out
           </h3>
 
-          <ul className="space-y-2">
+          <ul className="space-y-1">
 
             <li className={itemClass}>
               <CookingPot size={16} />
@@ -121,12 +121,12 @@ export default function MegaMenu({ mobile = false }) {
         </div>
                 {/* Column 3 */}
         <div>
-          <h3 className="flex items-center gap-2 text-sm font-bold mb-5">
+          <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
             <Home size={22} className="text-[#184896]" />
             Cleaning & Home
           </h3>
 
-          <ul className="space-y-2">
+          <ul className="space-y-1">
 
             <li className={itemClass}>
               <BrushCleaning size={16} />
@@ -158,12 +158,12 @@ export default function MegaMenu({ mobile = false }) {
 
         {/* Column 4 */}
         <div>
-          <h3 className="flex items-center gap-2 text-sm font-bold mb-5">
+          <h3 className="flex items-center gap-2 text-sm font-bold mb-3">
             <Shield size={22} className="text-[#184896]" />
             Security & Smart Home
           </h3>
 
-          <ul className="space-y-2">
+          <ul className="space-y-1">
 
             <li className={itemClass}>
               <Camera size={16} />
@@ -198,7 +198,7 @@ export default function MegaMenu({ mobile = false }) {
       {/* Brands - Desktop Only */}
       {!mobile && (
         <>
-          <div className="border-t mt-6 pt-5">
+          <div className="border-t mt-4 pt-3">
 
             <h4 className="flex items-center gap-2 font-bold text-base mb-4">
               <Snowflake size={22} className="text-[#184896]" />
@@ -235,7 +235,7 @@ export default function MegaMenu({ mobile = false }) {
 
           </div>
                     {/* Bottom */}
-          <div className="border-t mt-6 pt-5 flex items-center justify-between">
+          <div className="border-t mt-3 pt-5 flex items-center justify-between">
 
             <button className="text-[#184896] text-sm font-semibold flex items-center gap-2 hover:underline underline-offset-4">
               View All Services
