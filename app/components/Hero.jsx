@@ -75,7 +75,7 @@ export default function Hero() {
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <button className="bg-[#1d4f9d] hover:bg-[#163f81] px-8 py-3 rounded text-lg font-semibold flex items-center justify-center gap-3 cursor-pointer">
                 <Phone size={20} />
-                Call/WhatsApp +91 992 710 1910
+                Call/WhatsApp +91 992 710 1994
               </button>
 
               <button className="border border-white/30 bg-white/10 backdrop-blur-sm px-8 py-3 rounded text-lg font-semibold hover:bg-white/20 cursor-pointer">

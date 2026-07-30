@@ -114,7 +114,7 @@ export default function Footer() {
                 <Mail className="text-[#1f5ab5]" size={21} />
                 <div>
                   <p className="font-bold text-base">
-                    info@protechfitout.com
+                    mohdasif0414@gmail.com
                   </p>
                   <p className="text-slate-400 text-sm hover:text-white transition-colors duration-300 cursor-pointer">
                     Email Us Anytime

@@ -99,7 +99,7 @@ export default function EmergencyHero() {
     />
 
     <span className="text-red-600 font-bold text-2xl md:text-4xl">
-      +971 56 151 7463
+      +91 954 802 5712 
     </span>
   </a>
 </div>

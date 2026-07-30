@@ -36,7 +36,7 @@ export default function EmergencyCTA() {
             <Phone size={22} strokeWidth={2.5} />
 
             <span className="text-xl md:text-1xl">
-              +971 56 151 7463
+              +91 992 710 1994
             </span>
           </a>
 
