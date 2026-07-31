@@ -7,17 +7,17 @@ export default function AboutPage() {
 
       {/* ================= HERO ================= */}
 
-      <section className="relative h-[320px] sm:h-[380px] md:h-[450px] lg:h-[520px] flex items-center justify-center">
+      <section className="relative h-[420px] sm:h-[480px] md:h-[550px] lg:h-[620px] flex items-center justify-center">
 
         <Image
           src="/images/door.png"
           alt="About ProTech"
           fill
           priority
-          className="object-cover"
+          className="object-cover object-[center_45%]"
         />
 
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061224]/80 via-[#184896]/60 to-[#061224]/80"></div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center px-6">
 
@@ -25,11 +25,11 @@ export default function AboutPage() {
             ABOUT PROTECH
           </span>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            Dubai's Trusted Home Maintenance Experts
+          <h1 className="text-4xl sm:text-4xl md:text-3xl lg:text-6xl font-bold text-white leading-tight">
+            Dubai's Trusted Home Maintenance Experts.
           </h1>
 
-          <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto leading-8">
+          <p className="mt-6 text-base sm:text-base md:text-lg text-gray-200 max-w-3xl mx-auto leading-8">
             Trusted Home Maintenance & Renovation Experts across Dubai.
             Delivering quality workmanship, fast response,
             and reliable service for homes and businesses.

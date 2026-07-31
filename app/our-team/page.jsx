@@ -11,17 +11,17 @@ export default function OurTeamPage () {
 
   {/* ================= HERO ================= */}
 
-  <section className="relative h-[340px] sm:h-[420px] md:h-[500px] lg:h-[600px] overflow-hidden flex items-center justify-center">
+  <section className="relative mt-20 h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden flex items-center justify-center">
 
     <Image
-      src="/images/welcome.png"
+      src="/images/1.welcome.png"
       alt="Our Team"
       fill
       priority
-      className="object-cover"
+      className="object-cover  scale-140 object-[center_35%]"
     />
 
-    <div className="absolute inset-0 bg-gradient-to-r from-[#0A2A5E]/90 via-[#184896]/35 to-[#0A2A5E]/90" />
+    <div className="absolute inset-0 bg-black/75" />
 
     <motion.div
       initial={{ opacity: 0, y: 70 }}
@@ -34,13 +34,13 @@ export default function OurTeamPage () {
         OUR PROFESSIONAL TEAM
       </span>
 
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
         Meet The Experts Behind
         <br />
         ProTech Dubai
       </h1>
 
-      <p className="mt-8 text-lg md:text-xl text-gray-200 leading-8 max-w-3xl mx-auto">
+      <p className="mb-29 text-base mt-8 md:text-lg text-gray-200 leading-8 max-w-3xl mx-auto">
         Our experienced engineers, technicians and customer support team
         work together to deliver exceptional maintenance and renovation
         services across Dubai.
