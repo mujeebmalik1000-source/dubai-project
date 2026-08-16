@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Phone,
@@ -77,10 +78,22 @@ export default function Hero() {
                 <Phone size={20} />
                 Call/WhatsApp +91 992 710 1994
               </button>
+              
+              
 
-              <button className="border border-white/30 bg-white/10 backdrop-blur-sm px-8 py-3 rounded text-lg font-semibold hover:bg-white/20 cursor-pointer">
+              <Link href="/booking">
+  <button className="border border-white/30 bg-white/10 backdrop-blur-sm px-8 py-3 rounded text-lg font-semibold hover:bg-white/20 cursor-pointer">
+    Book Online
+  </button>
+</Link>
+
+
+
+
+               {/* <button className="border border-white/30 bg-white/10 backdrop-blur-sm px-8 py-3 rounded text-lg font-semibold hover:bg-white/20 cursor-pointer">
                 Book Online
-              </button>
+              </button>  */}
+
             </div>
           </div>
         </div>
