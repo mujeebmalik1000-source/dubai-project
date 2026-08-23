@@ -27,60 +27,92 @@ export default function ContactCard() {
 
       <div className="space-y-6">
 
-        <div className="flex items-start gap-4">
-          <div className="bg-[#184896] p-3 rounded-full">
-            <Phone size={20} />
-          </div>
+        <a
+  href="tel:+919548025712"
+  className="flex items-start gap-4 cursor-pointer group"
+>
+  <div className="bg-[#184896] p-3 rounded-full group-hover:bg-[#1f5ab5] transition">
+    <Phone size={20} />
+  </div>
 
-          <div>
-            <h4 className="font-semibold">Call Us</h4>
-            <p className="text-gray-300">
-              +971 56 151 7463
-            </p>
-          </div>
-        </div>
+  <div>
+    <h4 className="font-semibold">Call Us</h4>
+    <p className="text-gray-300">
+      +91 954 802 5712
+    </p>
+  </div>
+</a>
 
-        <div className="flex items-start gap-4">
-          <div className="bg-green-600 p-3 rounded-full">
-            <MessageCircle size={20} />
-          </div>
 
-          <div>
-            <h4 className="font-semibold">WhatsApp</h4>
-            <p className="text-gray-300">
-              +971 56 151 7463
-            </p>
-          </div>
-        </div>
 
-        <div className="flex items-start gap-4">
-          <div className="bg-red-600 p-3 rounded-full">
-            <Mail size={20} />
-          </div>
+<a
+  href="https://wa.me/919927101994"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-start gap-4 cursor-pointer group"
+>
+  <div className="bg-green-600 p-3 rounded-full group-hover:bg-green-500 transition">
+    <MessageCircle size={20} />
+  </div>
 
-          <div>
-            <h4 className="font-semibold">Email</h4>
-            <p className="text-gray-300 break-all">
-              info@dubaihomeservices.com
-            </p>
-          </div>
-        </div>
+  <div>
+    <h4 className="font-semibold group-hover:text-green-400 transition">
+      WhatsApp
+    </h4>
 
-        <div className="flex items-start gap-4">
-          <div className="bg-yellow-500 p-3 rounded-full">
-            <MapPin size={20} />
-          </div>
+    <p className="text-gray-300">
+      +91 992 710 1994
+    </p>
+  </div>
+</a>
 
-          <div>
-            <h4 className="font-semibold">Office</h4>
-            <p className="text-gray-300">
-              Prime Tower, Business Bay,<br />
-              Dubai, UAE
-            </p>
-          </div>
-        </div>
 
-      </div>
+
+<a
+  href="mailto:mujeebmalik1000@gmail.com"
+  className="flex items-start gap-4 cursor-pointer group"
+>
+  <div className="bg-red-600 p-3 rounded-full group-hover:bg-red-500 transition">
+    <Mail size={20} />
+  </div>
+
+  <div>
+    <h4 className="font-semibold group-hover:text-red-400 transition">
+      Email
+    </h4>
+
+    <p className="text-gray-300 break-all">
+      mujeebmalik1000@gmail.com
+    </p>
+  </div>
+</a>
+
+
+
+<a
+  href="https://www.google.com/maps/search/?api=1&query=Prime+Tower+Business+Bay+Dubai+UAE"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-start gap-4 cursor-pointer group"
+>
+  <div className="bg-yellow-500 p-3 rounded-full group-hover:bg-yellow-400 transition">
+    <MapPin size={20} />
+  </div>
+
+  <div>
+    <h4 className="font-semibold group-hover:text-yellow-400 transition">
+      Office
+    </h4>
+
+    <p className="text-gray-300">
+      Prime Tower, Business Bay,<br />
+      Dubai, UAE
+    </p>
+  </div>
+</a>
+
+
+    </div>
 
       {/* Divider */}
 
@@ -113,9 +145,14 @@ export default function ContactCard() {
 
       {/* Button */}
 
-      <button className="w-full mt-8 bg-[#184896] hover:bg-[#123b79] transition-all duration-300 py-3 rounded-lg font-semibold">
-        Call Now
-      </button>
+      <button
+  onClick={() => (window.location.href = "tel:9548025712")}
+  className="w-full bg-[#1f5ab5] text-white py-3 mt-5 rounded-lg text-center font-semibold hover:bg-[#17498f] cursor-pointer transition"
+>
+  Call Now
+</button>
+
+      
 
     </div>
   );
