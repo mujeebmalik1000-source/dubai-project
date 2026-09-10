@@ -11,12 +11,16 @@ import {
 
 export default function RenovationSection() {
   return (
-    <section className="py-16 bg-[#f8fafc]">
+    <section 
+          id="renovation"
+          className="py-16 bg-[#f8fafc] scroll-mt-24"
+
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
         <div className="flex items-center gap-6 mb-10">
-          <div className="w-14 h-14 bg-emerald-500 rounded -2x1 flex items-center justify-center">
+          <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-cente">
             <Hammer size={28} className="text-white" />
           </div>
 

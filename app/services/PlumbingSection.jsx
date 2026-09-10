@@ -8,12 +8,15 @@ import {
 
 export default function PlumbingSection() {
   return (
-    <section className="py-16 bg-gray-100">
+    <section 
+        id="plumbing"
+        className="py-16 bg-gray-100 scroll-mt-24"
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
         <div className="flex items-center gap-6 mb-10">
-          <div className="w-14 h-14 bg-blue-500 rounded -2x1 flex items-center justify-center">
+          <div className="w-14 h-14 bg-blue-500 rounded-2xl flex items-center justify-center">
             <Wrench size={28} className="text-white" />
           </div>
 
@@ -31,7 +34,7 @@ export default function PlumbingSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-8">
 
           {/* Card 1 */}
-          <div className="group border border-blue-200 rounded -2x1 p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div className="group border border-blue-200 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
             <div className="flex justify-between items-start">
               <div className="flex gap-6">
                 <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
@@ -59,7 +62,7 @@ export default function PlumbingSection() {
           </div>
 
           {/* Card 2 */}
-          <div className="group border border-blue-200 rounded -2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div className="group border border-blue-200 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
             <div className="flex justify-between items-start">
               <div className="flex gap-6">
                 <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
@@ -91,7 +94,7 @@ export default function PlumbingSection() {
           </div>
 
           {/* Card 3 */}
-          <div className="group border border-blue-200 rounded -2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div className="group border border-blue-200 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
             <div className="flex justify-between items-start">
               <div className="flex gap-6">
                 <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
@@ -122,7 +125,7 @@ export default function PlumbingSection() {
           </div>
 
           {/* Card 4 */}
-          <div className="group border border-blue-200 rounded -2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div className="group border border-blue-200 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 cursor-pointer">
             <div className="flex justify-between items-start">
               <div className="flex gap-6">
                 <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">

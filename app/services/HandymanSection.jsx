@@ -10,7 +10,10 @@ import {
 
 export default function HandymanSection() {
   return (
-    <section className="py-16 bg-white">
+    <section 
+         id="handyman"
+         className="py-16 bg-white scroll-mt-24"
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}

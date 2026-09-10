@@ -10,12 +10,17 @@ import {
 
 export default function FlooringSection() {
   return (
-    <section className="py-16 bg-gray-100">
+    <section 
+       id="flooring"
+       className="py-16 bg-gray-100 scroll-mt-24"
+
+
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
         <div className="flex items-center gap-6 mb-10">
-          <div className="w-14 h-14 bg-emerald-500 rounded -2x1 flex items-center justify-center">
+          <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center">
             <Hammer size={28} className="text-white" />
           </div>
 

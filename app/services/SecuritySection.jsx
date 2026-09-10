@@ -11,7 +11,11 @@ import {
 
 export default function SecuritySection() {
   return (
-    <section className="py-16 bg-gray-100">
+    <section 
+        id="security"
+        className="py-16 bg-gray-100 scroll-mt-24"
+
+    >
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -36,11 +40,11 @@ export default function SecuritySection() {
         <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-3 gap-8">
 
           {/* Card 1 */}
-          <div className="group border border-bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+          <div className="group border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
             <div className="flex justify-between items-start">
               <div className="flex gap-5">
                 <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center">
-                  <Camera size={28} className="text-bg-gray-400" />
+                  <Camera size={28} className="text-gray-400" />
                 </div>
 
                 <div>
