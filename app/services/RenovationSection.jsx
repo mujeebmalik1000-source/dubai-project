@@ -12,7 +12,7 @@ import {
 export default function RenovationSection() {
   return (
     <section 
-          id="renovation"
+          id="renovations"
           className="py-16 bg-[#f8fafc] scroll-mt-24"
 
     >

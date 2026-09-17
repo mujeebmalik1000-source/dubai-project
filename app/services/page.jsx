@@ -9,7 +9,7 @@ import EmergencySection from "../services/EmergencySection";
 import PackagesSection from "../services/PackagesSection";
 import WhyChooseSection from "../services/WhyChooseSection";
 import HelpSection from "../services/HelpSection";
-import FooterSection from "../services/FooterSection";
+import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 
         
@@ -28,7 +28,7 @@ export default function ServicesPage() {
       <PackagesSection />
       <WhyChooseSection />
       <HelpSection />
-      <FooterSection />
+      <Footer />
       <ScrollToTop />
    
     </>

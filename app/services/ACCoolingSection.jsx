@@ -10,7 +10,7 @@ export default function ACCoolingSection() {
   return (
 
     <section 
-       id="ac-cooling"
+       id="ac-services"
        className="py-16 bg-white scroll-mt-24"
       
     >

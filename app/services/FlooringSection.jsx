@@ -11,7 +11,7 @@ import {
 export default function FlooringSection() {
   return (
     <section 
-       id="flooring"
+       id="flooring-tiling"
        className="py-16 bg-gray-100 scroll-mt-24"
 
 

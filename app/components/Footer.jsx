@@ -26,11 +26,13 @@ export default function Footer() {
 
           {/* Logo */}
           <div>
-            <img
-              src="/images/protech.png"
-              alt="Logo"
-              className="w-14 h-14 object-contain"
-            />
+
+             <img
+                src="/images/home-care-transparent.png"
+                alt="Home Care Pro"
+                className="w-[200px] h-auto max-h-[100px] object-contain object-left mix-blend-screen"
+              />
+           
 
             <p className="mt-6 text-slate-300 text-base leading-8">
               Dubai's trusted home maintenance and renovation company.
@@ -116,11 +118,19 @@ export default function Footer() {
                   <p className="font-bold text-base">
                     mohdasif0414@gmail.com
                   </p>
+
+                  <p className="font-bold text-base">
+                    nazakatsaifi88@gmail.com
+                  </p>
+
+
                   <p className="text-slate-400 text-sm hover:text-white transition-colors duration-300 cursor-pointer">
                     Email Us Anytime
                   </p>
                 </div>
               </div>
+
+
 
               <div className="flex gap-4">
                 <MapPin className="text-[#1f5ab5]" size={21} />

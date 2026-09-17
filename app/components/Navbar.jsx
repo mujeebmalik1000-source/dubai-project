@@ -36,9 +36,9 @@ const closeTimeout = useRef(null);
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src="/images/protech.png"
+              src="/images/home-care.png"
               alt="logo"
-              className="w-14 h-14 object-contain"
+              className="w-16 h-16 object-contain"
             />
           </div>
 

@@ -12,7 +12,7 @@ import {
 export default function SecuritySection() {
   return (
     <section 
-        id="security"
+        id="security-cctv"
         className="py-16 bg-gray-100 scroll-mt-24"
 
     >
