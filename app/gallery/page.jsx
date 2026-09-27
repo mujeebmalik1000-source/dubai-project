@@ -1,44 +1,42 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Footer from "../components/Footer";
 
-const projects = [
-  {
-    title: "Luxury Villa AC Installation",
-    category: "AC Services",
-    image: "/images/Acproject7.png",
-  },
-  {
-    title: "Modern Kitchen Renovation",
-    category: "Renovation",
-    image: "/images/Ranoproject8.png",
-  },
-  {
-    title: "Luxury Bathroom Upgrade",
-    category: "Plumbing",
-    image: "/images/Plumproject9.png",
-  },
-  {
-    title: "Smart Electrical Installation",
-    category: "Electrical",
-    image: "/images/Elecproject10.png",
-  },
-  {
-    title: "Premium Wall Painting",
-    category: "Painting",
-    image: "/images/Panproject11.png",
-  },
-  {
-    title: "Complete Home Maintenance",
-    category: "Maintenance",
-    image: "/images/Mainproject12.png",
-  },
-];
-
 export default function GalleryPage() {
+  const [projects, setProjects] = useState([]);
+  const [featuredProject, setFeaturedProject] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await fetch("/api/gallery");
+        const data = await response.json();
+
+        if (data.success) {
+          setProjects(data.projects || []);
+          setFeaturedProject(data.featuredProject || null);
+        }
+      } catch (error) {
+        console.error("Gallery fetch error:", error);
+      }
+    };
+
+    fetchGallery();
+  }, []);
+
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter(
+          (project) => project.category === activeCategory
+        );
+
   return (
     <main>
 
@@ -74,40 +72,41 @@ export default function GalleryPage() {
           {/* Badge */}
 
           <motion.span
-  initial={{ opacity: 0, scale: 0.8 }}
-  animate={{
-    opacity: 1,
-    y: [0, -5, 0],
-    scale: [1, 1.03, 1],
-  }}
-  transition={{
-    duration: 2.5,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  whileHover={{
-    scale: 1.08,
-    boxShadow: "0 0 30px rgba(34,211,238,0.7)",
-  }}
-  className="relative inline-flex items-center mt-16 overflow-hidden rounded-full px-4 py-3 cursor-pointer bg-white/6 backdrop-blur-2xl border border-cyan-300/30 shadow-[0_0_25px_rgba(24,72,150,0.4)]"
->
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{
+              opacity: 1,
+              y: [0, -5, 0],
+              scale: [1, 1.03, 1],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            whileHover={{
+              scale: 1.08,
+              boxShadow: "0 0 30px rgba(34,211,238,0.7)",
+            }}
+            className="relative inline-flex items-center mt-16 overflow-hidden rounded-full px-4 py-3 cursor-pointer bg-white/6 backdrop-blur-2xl border border-cyan-300/30 shadow-[0_0_25px_rgba(24,72,150,0.4)]"
+          >
 
-  {/* Shine Effect */}
-  <motion.span
-    animate={{ x: ["-150%", "250%"] }}
-    transition={{
-      duration: 2.5,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-    className="absolute inset-y-0 left-0 w-20 -skew-x-12 bg-gradient-to-r from-transparent via-white/50 to-transparent"
-  />
+            {/* Shine Effect */}
 
-  <span className="relative z-10 text-sm md:text-base font-bold uppercase tracking-[5px] text-white">
-    ✦ PROJECTS GALLERY ✦
-  </span>
+            <motion.span
+              animate={{ x: ["-150%", "250%"] }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute inset-y-0 left-0 w-20 -skew-x-12 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+            />
 
-</motion.span>
+            <span className="relative z-10 text-sm md:text-base font-bold uppercase tracking-[5px] text-white">
+              ✦ PROJECTS GALLERY ✦
+            </span>
+
+          </motion.span>
 
           {/* Heading */}
 
@@ -142,15 +141,18 @@ export default function GalleryPage() {
               whileTap={{ scale: 0.95 }}
               className="group relative overflow-hidden rounded-xl px-8 py-4 font-bold text-white cursor-pointer shadow-2xl"
             >
+
               <span className="absolute inset-0 bg-gradient-to-r from-[#00C6FF] via-[#184896] to-[#00C6FF] bg-[length:250%_250%] animate-[gradient_5s_ease_infinite]"></span>
 
               <span className="relative flex items-center gap-3">
                 View Our Projects
+
                 <ArrowRight
                   size={20}
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
               </span>
+
             </motion.button>
 
             {/* Glass Button */}
@@ -173,376 +175,382 @@ export default function GalleryPage() {
 
       {/* ================= PROJECT GALLERY ================= */}
 
-<section className="py-24 bg-gradient-to-b from-white to-slate-100">
+      <section className="py-24 bg-gradient-to-b from-white to-slate-100">
 
-  <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="text-center"
-    >
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
 
-      <span className="text-[#184896] uppercase tracking-[4px] font-bold">
-        OUR PORTFOLIO
-      </span>
-
-      <h2 className="text-3xl md:text-5xl font-bold mt-5">
-        Recent Projects
-      </h2>
-
-      <p className="text-gray-600 text-lg leading-8 max-w-3xl mx-auto mt-6">
-        Browse some of our completed maintenance, renovation,
-        electrical and AC projects across Dubai.
-      </p>
-
-    </motion.div>
-
-    {/* Category Buttons */}
-
-    <div className="flex flex-wrap justify-center gap-4 mt-12">
-
-      {[
-        "All",
-        "AC",
-        "Renovation",
-        "Plumbing",
-        "Electrical",
-        "Painting",
-      ].map((item) => (
-
-        <button
-          key={item}
-          className="cursor-pointer rounded-full border border-[#184896] px-6 py-3 font-semibold text-[#184896] transition-all duration-300 hover:bg-[#184896] hover:text-white hover:scale-105"
-        >
-          {item}
-        </button>
-
-      ))}
-
-    </div>
-
-    {/* Gallery Grid */}
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-
-      {projects.map((project, index) => (
-
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 70 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: index * 0.1 }}
-          whileHover={{ y: -10 }}
-          className="group overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
-        >
-
-          <div className="relative overflow-hidden">
-
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={600}
-              height={420}
-              className="h-[270px] w-full object-cover transition duration-700 group-hover:scale-110"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
-
-            <span className="absolute top-5 left-5 bg-[#184896] text-white text-xs font-bold px-4 py-2 rounded-full">
-              {project.category}
+            <span className="text-[#184896] uppercase tracking-[4px] font-bold">
+              OUR PORTFOLIO
             </span>
 
-          </div>
+            <h2 className="text-3xl md:text-5xl font-bold mt-5">
+              Recent Projects
+            </h2>
 
-          <div className="p-6">
-
-            <h3 className="text-2xl font-bold group-hover:text-[#184896] transition">
-              {project.title}
-            </h3>
-
-            <p className="text-gray-600 mt-3 leading-7">
-              Completed with premium workmanship, quality materials,
-              and professional finishing.
+            <p className="text-gray-600 text-lg leading-8 max-w-3xl mx-auto mt-6">
+              Browse some of our completed maintenance, renovation,
+              electrical and AC projects across Dubai.
             </p>
 
-            <button className="mt-6 font-bold text-[#184896] cursor-pointer hover:translate-x-2 transition-all duration-300">
-              View Project →
-            </button>
+          </motion.div>
+
+          {/* Category Buttons */}
+
+          <div className="flex flex-wrap justify-center gap-4 mt-12">
+
+            {[
+              "All",
+              "AC",
+              "Renovation",
+              "Plumbing",
+              "Electrical",
+              "Painting",
+              "Maintenance",
+            ].map((item) => (
+
+              <button
+                key={item}
+                onClick={() => setActiveCategory(item)}
+                className="cursor-pointer rounded-full border border-[#184896] px-6 py-3 font-semibold text-[#184896] transition-all duration-300 hover:bg-[#184896] hover:text-white hover:scale-105"
+              >
+                {item}
+              </button>
+
+            ))}
 
           </div>
 
-        </motion.div>
+          {/* Gallery Grid */}
 
-      ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
 
-    </div>
+            {filteredProjects.map((project, index) => (
 
-  </div>
+              <Link
+                key={project.slug}
+                href={`/gallery/${project.slug}`}
+                className="block"
+              >
 
-</section>
+                <motion.div
+                  initial={{ opacity: 0, y: 70 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  className="group overflow-hidden rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+                >
 
-{/* ================= FEATURED PROJECT ================= */}
+                  <div className="relative overflow-hidden">
 
-<section className="py-24 bg-[#0B1220] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={600}
+                      height={420}
+                      className="h-[270px] w-full object-cover transition duration-700 group-hover:scale-110"
+                    />
 
-  <div className="max-w-7xl mx-auto px-6 lg:px-10">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
 
-    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                    <span className="absolute top-5 left-5 bg-[#184896] text-white text-xs font-bold px-4 py-2 rounded-full">
+                      {project.category}
+                    </span>
 
-      {/* Left Image */}
+                  </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: -70 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative group cursor-pointer"
-      >
+                  <div className="p-6">
 
-        <div className="overflow-hidden rounded-3xl">
+                    <h3 className="text-2xl font-bold group-hover:text-[#184896] transition">
+                      {project.title}
+                    </h3>
 
-          <Image
-            src="/images/featured-project.png"
-            alt="Featured Project"
-            width={700}
-            height={850}
-            className="w-full rounded-3xl object-cover transition duration-700 group-hover:scale-110"
-          />
+                    <p className="text-gray-600 mt-3 leading-7">
+                      {project.description ||
+                        "Completed with premium workmanship, quality materials, and professional finishing."}
+                    </p>
+
+                    <span className="inline-block mt-6 font-bold text-[#184896] group-hover:translate-x-2 transition-all duration-300">
+                      View Project →
+                    </span>
+
+                  </div>
+
+                </motion.div>
+
+              </Link>
+
+            ))}
+
+          </div>
 
         </div>
 
-        {/* Floating Badge */}
+      </section>
 
-        <div className="absolute bottom-8 left-8 bg-white rounded-2xl px-6 py-5 shadow-xl">
+      {/* ================= FEATURED PROJECT ================= */}
 
-          <h3 className="text-4xl font-black text-[#184896]">
-            100%
-          </h3>
+      {featuredProject && (
+        <section className="py-24 bg-[#0B1220] overflow-hidden">
 
-          <p className="text-gray-600 font-medium">
-            Client Satisfaction
-          </p>
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
-        </div>
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-      </motion.div>
+              {/* Left Image */}
 
-      {/* Right Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -70 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative group cursor-pointer"
+              >
 
-      <motion.div
-        initial={{ opacity: 0, x: 70 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
+                <div className="overflow-hidden rounded-3xl">
 
-        <span className="text-cyan-400 uppercase tracking-[4px] font-bold">
-          FEATURED PROJECT
-        </span>
+                  <Image
+                    src={featuredProject.image}
+                    alt={featuredProject.title}
+                    width={700}
+                    height={850}
+                    className="w-full rounded-3xl object-cover transition duration-700 group-hover:scale-110"
+                  />
 
-        <h2 className="text-4xl md:text-5xl font-black text-white mt-6 leading-tight">
-          Luxury Villa
-          Renovation in Dubai Hills
-        </h2>
+                </div>
 
-        <p className="text-slate-300 text-lg leading-8 mt-8">
-          Our expert team transformed this luxury villa with complete
-          renovation services including premium painting, smart
-          electrical systems, modern plumbing, AC installation and
-          elegant interior finishing.
-        </p>
+                {/* Floating Badge */}
 
-        {/* Features */}
+                <div className="absolute bottom-8 left-8 bg-white rounded-2xl px-6 py-5 shadow-xl">
 
-        <div className="grid grid-cols-2 gap-6 mt-10">
+                  <h3 className="text-4xl font-black text-[#184896]">
+                    100%
+                  </h3>
 
-          {[
-            "Complete Renovation",
-            "Luxury Interior",
-            "Premium Materials",
-            "Smart Lighting",
-            "Modern Plumbing",
-            "5-Star Finishing",
-          ].map((item, index) => (
+                  <p className="text-gray-600 font-medium">
+                    Client Satisfaction
+                  </p>
 
-            <div
-              key={index}
-              className="flex items-center gap-3"
-            >
+                </div>
 
-              <div className="w-3 h-3 rounded-full bg-cyan-400"></div>
+              </motion.div>
 
-              <span className="text-white">
-                {item}
-              </span>
+              {/* Right Content */}
+
+              <motion.div
+                initial={{ opacity: 0, x: 70 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+
+                <span className="text-cyan-400 uppercase tracking-[4px] font-bold">
+                  FEATURED PROJECT
+                </span>
+
+                <h2 className="text-4xl md:text-5xl font-black text-white mt-6 leading-tight">
+                  {featuredProject.title}
+                </h2>
+
+                <p className="text-slate-300 text-lg leading-8 mt-8">
+                  {featuredProject.description}
+                </p>
+
+                {/* Features */}
+
+                <div className="grid grid-cols-2 gap-6 mt-10">
+
+                  {(featuredProject.features || []).map((item, index) => (
+
+                    <div
+                      key={index}
+                      className="flex items-center gap-3"
+                    >
+
+                      <div className="w-3 h-3 rounded-full bg-cyan-400"></div>
+
+                      <span className="text-white">
+                        {item}
+                      </span>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+                {/* Stats */}
+
+                <div className="flex flex-wrap gap-10 mt-12">
+
+                  <div>
+
+                    <h3 className="text-5xl font-black text-cyan-400">
+                      {featuredProject.duration || "—"}
+                    </h3>
+
+                    <p className="text-slate-300 mt-2">
+                      Days Project
+                    </p>
+
+                  </div>
+
+                  <div>
+
+                    <h3 className="text-5xl font-black text-cyan-400">
+                      {featuredProject.teamMembers || "—"}
+                    </h3>
+
+                    <p className="text-slate-300 mt-2">
+                      Team Members
+                    </p>
+
+                  </div>
+
+                  <div>
+
+                    <h3 className="text-5xl font-black text-cyan-400">
+                      {featuredProject.rating || "★★★★★"}
+                    </h3>
+
+                    <p className="text-slate-300 mt-2">
+                      Client Rating
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </motion.div>
 
             </div>
 
-          ))}
+          </div>
+
+        </section>
+      )}
+
+      {/* ================= CTA SECTION ================= */}
+
+      <section className="relative overflow-hidden py-24 bg-gradient-to-r from-[#071B3B] via-[#184896] to-[#0A2A5E]">
+
+        {/* Background Blur */}
+
+        <div className="absolute -top-24 left-0 w-80 h-80 bg-cyan-400/20 rounded-full blur-[130px]"></div>
+
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[150px]"></div>
+
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+
+          <motion.div
+            initial={{ opacity: 0, y: 70 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+
+            <span className="inline-block bg-white text-[#184896] px-6 py-2 rounded-full font-bold tracking-[3px] uppercase">
+              Let's Build Something Amazing
+            </span>
+
+            <h2 className="mt-8 text-4xl md:text-6xl font-black text-white leading-tight">
+              Ready To Start
+              <br />
+              Your Next Project?
+            </h2>
+
+            <p className="mt-8 text-blue-100 text-lg leading-8 max-w-3xl mx-auto">
+              Whether it's AC services, plumbing, electrical work,
+              painting or complete renovation,
+              ProTech Dubai is ready to deliver exceptional results.
+            </p>
+
+            {/* Buttons */}
+
+            <div className="flex flex-col sm:flex-row justify-center gap-5 mt-12">
+
+              <Link
+                href="/booking"
+                className="cursor-pointer px-9 py-4 rounded-xl bg-white text-[#184896] font-bold hover:scale-105 transition duration-300 shadow-xl"
+              >
+                Request Free Quote
+              </Link>
+
+              <Link
+                href="/contact"
+                className="cursor-pointer px-9 py-4 rounded-xl border-2 border-white text-white font-bold hover:bg-white hover:text-[#184896] transition duration-300"
+              >
+                Contact Us
+              </Link>
+
+            </div>
+
+          </motion.div>
+
+          {/* Statistics */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 70 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-20"
+          >
+
+            {[
+              {
+                number: "5000+",
+                title: "Projects Completed",
+              },
+              {
+                number: "98%",
+                title: "Happy Clients",
+              },
+              {
+                number: "24/7",
+                title: "Emergency Support",
+              },
+              {
+                number: "10+",
+                title: "Years Experience",
+              },
+            ].map((item, index) => (
+
+              <div
+                key={index}
+                className="cursor-pointer rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 text-center hover:bg-white/20 transition duration-300"
+              >
+
+                <h3 className="text-5xl font-black text-white">
+                  {item.number}
+                </h3>
+
+                <p className="text-blue-100 mt-4 text-lg">
+                  {item.title}
+                </p>
+
+              </div>
+
+            ))}
+
+          </motion.div>
 
         </div>
 
-        {/* Stats */}
+      </section>
 
-        <div className="flex flex-wrap gap-10 mt-12">
+      {/* ================= FOOTER ================= */}
 
-          <div>
-
-            <h3 className="text-5xl font-black text-cyan-400">
-              30+
-            </h3>
-
-            <p className="text-slate-300 mt-2">
-              Days Project
-            </p>
-
-          </div>
-
-          <div>
-
-            <h3 className="text-5xl font-black text-cyan-400">
-              18
-            </h3>
-
-            <p className="text-slate-300 mt-2">
-              Team Members
-            </p>
-
-          </div>
-
-          <div>
-
-            <h3 className="text-5xl font-black text-cyan-400">
-              ★★★★★
-            </h3>
-
-            <p className="text-slate-300 mt-2">
-              Client Rating
-            </p>
-
-          </div>
-
-        </div>
-
-      </motion.div>
-
-    </div>
-
-  </div>
-
-</section>
-
-{/* ================= CTA SECTION ================= */}
-
-<section className="relative overflow-hidden py-24 bg-gradient-to-r from-[#071B3B] via-[#184896] to-[#0A2A5E]">
-
-  {/* Background Blur */}
-
-  <div className="absolute -top-24 left-0 w-80 h-80 bg-cyan-400/20 rounded-full blur-[130px]"></div>
-
-  <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-[150px]"></div>
-
-  <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-
-    <motion.div
-      initial={{ opacity: 0, y: 70 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="text-center"
-    >
-
-      <span className="inline-block bg-white text-[#184896] px-6 py-2 rounded-full font-bold tracking-[3px] uppercase">
-        Let's Build Something Amazing
-      </span>
-
-      <h2 className="mt-8 text-4xl md:text-6xl font-black text-white leading-tight">
-        Ready To Start
-        <br />
-        Your Next Project?
-      </h2>
-
-      <p className="mt-8 text-blue-100 text-lg leading-8 max-w-3xl mx-auto">
-        Whether it's AC services, plumbing, electrical work,
-        painting or complete renovation,
-        ProTech Dubai is ready to deliver exceptional results.
-      </p>
-
-      {/* Buttons */}
-
-      <div className="flex flex-col sm:flex-row justify-center gap-5 mt-12">
-
-        <button className="cursor-pointer px-9 py-4 rounded-xl bg-white text-[#184896] font-bold hover:scale-105 transition duration-300 shadow-xl">
-          Request Free Quote
-        </button>
-
-        <button className="cursor-pointer px-9 py-4 rounded-xl border-2 border-white text-white font-bold hover:bg-white hover:text-[#184896] transition duration-300">
-          Contact Us
-        </button>
-
-      </div>
-
-    </motion.div>
-
-    {/* Statistics */}
-
-    <motion.div
-      initial={{ opacity: 0, y: 70 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="grid grid-cols-2 lg:grid-cols-4 gap-8 mt-20"
-    >
-
-      {[
-        {
-          number: "5000+",
-          title: "Projects Completed",
-        },
-        {
-          number: "98%",
-          title: "Happy Clients",
-        },
-        {
-          number: "24/7",
-          title: "Emergency Support",
-        },
-        {
-          number: "10+",
-          title: "Years Experience",
-        },
-      ].map((item, index) => (
-
-        <div
-          key={index}
-          className="cursor-pointer rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 p-8 text-center hover:bg-white/20 transition duration-300"
-        >
-
-          <h3 className="text-5xl font-black text-white">
-            {item.number}
-          </h3>
-
-          <p className="text-blue-100 mt-4 text-lg">
-            {item.title}
-          </p>
-
-        </div>
-
-      ))}
-
-    </motion.div>
-
-  </div>
-
-</section>
-
-{/* ================= FOOTER ================= */}
-
-<Footer />
+      <Footer />
 
     </main>
   );

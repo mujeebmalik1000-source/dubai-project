@@ -1,4 +1,32 @@
+
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
 export default function BlogPage() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch("/api/blogs");
+        const data = await response.json();
+
+        if (data.success) {
+          setBlogs(data.blogs);
+        }
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
   return (
     <main className="pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -13,56 +41,40 @@ export default function BlogPage() {
           condition.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {loading ? (
+          <p className="text-gray-600">Loading blogs...</p>
+        ) : blogs.length === 0 ? (
+          <p className="text-gray-600">No blogs available.</p>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          <div className="border rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-            <h2 className="text-xl font-semibold mb-3">
-              AC Maintenance Tips
-            </h2>
+            {blogs.map((blog) => (
+              <div
+                key={blog._id}
+                className="border rounded-xl p-6 shadow-sm hover:shadow-lg transition"
+              >
+                <h2 className="text-xl font-semibold mb-3">
+                  {blog.title}
+                </h2>
 
-            <p className="text-gray-600 mb-5">
-              Learn how regular maintenance improves AC performance and
-              saves electricity.
-            </p>
+                <p className="text-gray-600 mb-5">
+                  {blog.excerpt}
+                </p>
 
-            <button className="text-[#184896] font-semibold">
-              Read More →
-            </button>
+                <Link
+                  href={`/blog/${blog.slug}`}
+                  className="text-[#184896] font-semibold cursor-pointer"
+                >
+                  Read More →
+                </Link>
+              </div>
+            ))}
+
           </div>
-
-          <div className="border rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-            <h2 className="text-xl font-semibold mb-3">
-              Plumbing Guide
-            </h2>
-
-            <p className="text-gray-600 mb-5">
-              Simple plumbing maintenance tips every homeowner should
-              know.
-            </p>
-
-            <button className="text-[#184896] font-semibold">
-              Read More →
-            </button>
-          </div>
-
-          <div className="border rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-            <h2 className="text-xl font-semibold mb-3">
-              Electrical Safety
-            </h2>
-
-            <p className="text-gray-600 mb-5">
-              Important electrical safety practices for homes and
-              businesses.
-            </p>
-
-            <button className="text-[#184896] font-semibold">
-              Read More →
-            </button>
-          </div>
-
-        </div>
+        )}
 
       </div>
     </main>
   );
 }
+
