@@ -1,8 +1,8 @@
+
 import { NextResponse } from "next/server";
 import { connectDB } from "../../../lib/mongodb";
 import Service from "../../models/ServicesModel";
 
-// GET - सभी active services
 export async function GET() {
   try {
     await connectDB();
@@ -19,30 +19,21 @@ export async function GET() {
     console.error("Services GET Error:", error);
 
     return NextResponse.json(
-      {
-        success: false,
-        message: "Failed to fetch services",
-      },
+      { success: false, message: "Failed to fetch services" },
       { status: 500 }
     );
   }
 }
 
-// POST - नई service add करने के लिए
 export async function POST(request) {
   try {
     await connectDB();
 
-    const body = await request.json();
-
-    const { title, icon, description, slug } = body;
+    const { title, icon, description, slug } = await request.json();
 
     if (!title || !icon || !slug) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Title, icon and slug are required",
-        },
+        { success: false, message: "Title, icon and slug are required" },
         { status: 400 }
       );
     }
@@ -56,11 +47,7 @@ export async function POST(request) {
     });
 
     return NextResponse.json(
-      {
-        success: true,
-        message: "Service created successfully",
-        service,
-      },
+      { success: true, message: "Service created successfully", service },
       { status: 201 }
     );
   } catch (error) {
@@ -69,9 +56,11 @@ export async function POST(request) {
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to create service",
+        message: error.code === 11000
+          ? "This service slug already exists"
+          : "Failed to create service",
       },
-      { status: 500 }
+      { status: error.code === 11000 ? 409 : 500 }
     );
   }
 }

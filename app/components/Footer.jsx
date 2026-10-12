@@ -239,6 +239,33 @@ export default function Footer() {
         </div>
 
       </div>
+
+               {/* Admin login */}
+
+               <div className="mt-10 mb-2 flex justify-center">
+  <a
+    href="/admin/login"
+    className="group relative inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#4DA3FF] hover:bg-[#184896]/30 hover:shadow-[0_8px_30px_rgba(77,163,255,0.25)]"
+  >
+    <span className="absolute inset-0 rounded-full bg-[#4DA3FF]/10 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100" />
+
+    <span className="relative flex items-center gap-2">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#184896] transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+        🔐
+      </span>
+
+      <span>Admin Login</span>
+
+      <span className="text-[#4DA3FF] transition-transform duration-300 group-hover:translate-x-1">
+        →
+      </span>
+    </span>
+  </a>
+</div>
+
+
+
+
     </footer>
   );
 }
