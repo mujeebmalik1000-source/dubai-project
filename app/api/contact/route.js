@@ -1,3 +1,4 @@
+import { verifyAdminRequest } from "../../../lib/adminAuth";
 import { NextResponse } from "next/server";
 import { connectDB } from "../../../lib/mongodb";
 import Contact from "../../models/Contact";
@@ -5,6 +6,9 @@ import Contact from "../../models/Contact";
 export async function POST(request) {
   try {
     await connectDB();
+
+
+
 
     const body = await request.json();
 
@@ -75,6 +79,21 @@ export async function POST(request) {
 export async function GET() {
   try {
     await connectDB();
+
+
+
+
+const admin = await verifyAdminRequest();
+
+if (!admin) {
+  return NextResponse.json(
+    { success: false, message: "Unauthorized. Please login as admin." },
+    { status: 401 }
+  );
+}
+
+
+
 
     const enquiries = await Contact.find({})
       .sort({ createdAt: -1 })

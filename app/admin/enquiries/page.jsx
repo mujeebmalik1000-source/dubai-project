@@ -3,12 +3,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { RefreshCw, Mail, Phone, MapPin, ClipboardList } from "lucide-react";
+import {
+  RefreshCw,
+  Mail,
+  Phone,
+  MapPin,
+  ClipboardList,
+  Trash2,
+} from "lucide-react";
 
 export default function AdminEnquiriesPage() {
   const [enquiries, setEnquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [savingId, setSavingId] = useState("");
+  const [deletingId, setDeletingId] = useState("");
 
   async function fetchEnquiries() {
     try {
@@ -18,7 +27,6 @@ export default function AdminEnquiriesPage() {
       const response = await fetch("/api/contact", {
         cache: "no-store",
       });
-
       const data = await response.json();
 
       if (!response.ok || !data.success) {
@@ -37,6 +45,69 @@ export default function AdminEnquiriesPage() {
     fetchEnquiries();
   }, []);
 
+  async function handleStatusChange(id, status) {
+    try {
+      setSavingId(id);
+
+      const response = await fetch(`/api/contact/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Status update nahi hua.");
+      }
+
+      setEnquiries((previous) =>
+        previous.map((item) =>
+          item._id === id ? { ...item, status: data.enquiry.status } : item
+        )
+      );
+    } catch (err) {
+      alert(err.message || "Status update nahi hua.");
+    } finally {
+      setSavingId("");
+    }
+  }
+
+  async function handleDelete(id) {
+    const confirmed = window.confirm(
+      "Kya aap is enquiry ko hamesha ke liye delete karna chahte hain?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setDeletingId(id);
+
+      const response = await fetch(`/api/contact/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Enquiry delete nahi hui.");
+      }
+
+      setEnquiries((previous) =>
+        previous.filter((item) => item._id !== id)
+      );
+    } catch (err) {
+      alert(err.message || "Enquiry delete nahi hui.");
+    } finally {
+      setDeletingId("");
+    }
+  }
+
+  const statusLabels = {
+    new: "Pending",
+    contacted: "Contacted",
+    completed: "Completed",
+  };
+
   return (
     <main className="min-h-screen bg-slate-50 p-4 pt-24 md:p-8 md:pt-28">
       <div className="mx-auto max-w-7xl">
@@ -53,7 +124,8 @@ export default function AdminEnquiriesPage() {
           <div className="flex gap-3">
             <button
               onClick={fetchEnquiries}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-3 font-medium text-[#08152E] hover:bg-slate-100"
+              disabled={loading}
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-3 font-medium text-[#08152E] hover:bg-slate-100 disabled:opacity-50"
             >
               <RefreshCw size={18} />
               Refresh
@@ -93,7 +165,10 @@ export default function AdminEnquiriesPage() {
           </div>
         ) : enquiries.length === 0 ? (
           <div className="rounded-xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-            <ClipboardList className="mx-auto mb-3 text-slate-400" size={40} />
+            <ClipboardList
+              className="mx-auto mb-3 text-slate-400"
+              size={40}
+            />
             <h2 className="text-xl font-semibold text-[#08152E]">
               No Enquiries Yet
             </h2>
@@ -121,7 +196,7 @@ export default function AdminEnquiriesPage() {
                   </div>
 
                   <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                    Enquiry
+                    {statusLabels[item.status] || "Pending"}
                   </span>
                 </div>
 
@@ -170,14 +245,48 @@ export default function AdminEnquiriesPage() {
                     {item.description || "No message provided."}
                   </p>
 
-                  {item.email && (
-                    <a
-                      href={`mailto:${item.email}`}
-                      className="mt-5 inline-flex cursor-pointer rounded-lg bg-[#184896] px-4 py-2 font-medium text-white hover:bg-blue-800"
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <label className="text-sm font-medium text-slate-700">
+                      Status:
+                      <select
+                        value={item.status || "new"}
+                        disabled={savingId === item._id}
+                        onChange={(event) =>
+                          handleStatusChange(item._id, event.target.value)
+                        }
+                        className="ml-2 cursor-pointer rounded-lg border border-slate-300 bg-white px-3 py-2"
+                      >
+                        <option value="new">Pending</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </label>
+
+                    {savingId === item._id && (
+                      <span className="text-xs text-slate-500">Saving...</span>
+                    )}
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    {item.email && (
+                      <a
+                        href={`mailto:${item.email}`}
+                        className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#184896] px-4 py-2 font-medium text-white hover:bg-blue-800"
+                      >
+                        <Mail size={16} />
+                        Reply by Email
+                      </a>
+                    )}
+
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      disabled={deletingId === item._id}
+                      className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-4 py-2 font-medium text-white hover:bg-red-700 disabled:opacity-50"
                     >
-                      Reply by Email
-                    </a>
-                  )}
+                      <Trash2 size={16} />
+                      {deletingId === item._id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
